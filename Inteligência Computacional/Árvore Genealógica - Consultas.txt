@@ -1,0 +1,6 @@
+1 filho(joão, josé).
+2 mae(maria, X).
+3 primo(X, mário); prima(X, mário).
+4 
+5 descendente(carlos, X).
+6 irmao(X, helena); irma(X, helena).

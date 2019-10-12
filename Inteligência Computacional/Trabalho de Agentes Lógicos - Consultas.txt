@@ -1,0 +1,4 @@
+1 - ministrada_por(_, p) --p representa algum professor
+2 - ministrada_por(d, _) --d representa alguma disciplina
+3 - ministrada_por(d, P1), ministrada_por(d, P2) --P1 e P2 são variáveis
+4 -  

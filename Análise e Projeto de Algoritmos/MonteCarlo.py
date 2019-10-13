@@ -67,7 +67,7 @@ def polynomyParsev2():
     factor = 0
     if input('Deseja multiplicar por algum fator? [s/n] ') == 's':
         while factor == 0:
-            factor = int(input('Digite o fator (não nulo): '))
+            factor = int(input('Digite o fator (não nulo): ')) # Não aceita o polinômio nulo.
             if factor == 0:
                 print('Valor inválido!! Digite novamente: ')
     else:
@@ -82,12 +82,28 @@ def showPolynomys(poly1, poly2, factor=1):
     
     for k, v in poly1.items():
         if int(re.sub('\D', '', k)) > 1: # Remove os caracteres não numéricos.
-            extended += (str(v)+ k + ' + ') # Concatenação dos monômios.
+            if (v != 1) and (v != 0):
+                extended += (str(v)+ k + ' + ') # Concatenação dos monômios.
+            elif v == 1:
+                extended += (k + ' + ')
+            else:
+                pass # Quando v for zero, a string não será alterada. 
         elif int(re.sub('\D', '', k)) == 1:
-            extended += (str(v) + 'x + ')
+            if (v != 1) and (v != 0):
+                extended += (str(v) + 'x') 
+            elif v == 1:
+                extended += ('x')
+            else:
+                pass
         else:
-            extended += str(v)
-    
+            if v != 0:
+                extended += (' + ' + str(v))
+            else:
+                if extended[-2:] == '+ ':
+                    extended = extended[:-2] # Remove o último "+ ".
+        
+    extended = extended.replace('  + ', ' ')
+               
     if factor != 1:
         if poly2[0] > 0:
             factored += '({}x - {})'.format(factor, factor*poly2[0])
@@ -97,17 +113,17 @@ def showPolynomys(poly1, poly2, factor=1):
             factored += '({}x)'.format(factor)
     else:
         if poly2[0] > 0:
-    	    factored += '(x - {})'.format(factor*poly2[0])
+    	    factored += '(x - {})'.format(poly2[0])
         elif poly2[0] < 0:
-            factored += '(x + {})'.format(abs(factor*poly2[0]))
+            factored += '(x + {})'.format(abs(poly2[0]))
         else:
     	    factored += '(x)'
     
     for r in poly2[1:]: # Começa a iteração à partir da segunda raíz.
         if r > 0:
-    	    factored += '(x - {})'.format(factor*r)
+    	    factored += '(x - {})'.format(r)
         elif r < 0:
-            factored += '(x + {})'.format(abs(factor*r))
+            factored += '(x + {})'.format(abs(r))
         else:
             factored += '(x)'
        

@@ -11,7 +11,7 @@ def match(poly1, poly2, factor=1):
     
     valores = []
     while t < 10:
-        if len(poly1) != len(poly2) + 1:
+        if len(poly1) != len(poly2) + 1: # Compara os graus dos plinômios.
             return 'Não'
         grau = len(poly2)
         alfa = random.randint(1, 100 * grau)   
@@ -41,10 +41,35 @@ def polynomyParsev1(): # Em desenvolvimento.
     poly1 = {} # Dicionário
     poly2 = [] # Lista
     
-    zeros = fatorado.count(')x(') + fatorado.count('(X)')
+    zeros = fatorado.count(')x(') + fatorado.count('(x)')
     for i in range(0, zeros):
         poly2.append(0)
-        
+    f = fatorado.replace(')x(', ')(').replace('(x)', ')(')
+    f = f.split(')(')
+    for g in f:
+        r = re.search('[0-9]+', g) # Pega os digitos numéricos da substring 'g'.
+        if r is not None:
+            poly2.append(int(r.group(0))) # Adiciona as raízes restantes na lista.
+    
+    e = extendido.replace('-', '+ -').split('+')
+    for d in e:
+        s, t = d.split('x')
+        u = re.search('[0-9]+', s)
+        v = re.search('[0-9]+', t)
+        if u is not None:
+            if '-' in s:
+                coef = - int(u)
+            else:
+                coef = int(u)
+        else:
+            if '-' in s:
+                coef = -1
+            else:
+                coef = 1
+            
+        if v is not None:
+            exp = 1
+
 
 def polynomyParsev2(): 
     n = int(input('Digite o grau dos polinômios:'))

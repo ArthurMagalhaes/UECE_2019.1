@@ -31,3 +31,17 @@ b = int(input('Digite outro inteiro positivo:'))
 
 s = ex_01(a,b)
 print(s)
+
+
+def ex_04(obj, cap):
+n = len(obj)
+aux = []
+for i in range(0, n):
+aux.append(0)
+
+matrice = aux * n
+
+for i in range(0, n):
+for j in range(0, n):
+if obj.values()[i]['weight'] < cap and 
+
